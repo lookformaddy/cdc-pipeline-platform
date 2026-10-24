@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cdc-pipeline-platform"
+version = "1.0.0"
+description = "Enterprise change-data-capture pipeline platform: snapshot + incremental CDC merge, schema evolution, exactly-once-ish dedup, late-event handling, tombstones, time-travel reads, quality gates, lag/throughput metrics, checkpointed backfill/replay."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "CDC Pipeline Platform Contributors" }]
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "pydantic>=2.6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "httpx>=0.27"]
+
+[project.scripts]
+cdc-pipeline = "cdc_pipeline.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
